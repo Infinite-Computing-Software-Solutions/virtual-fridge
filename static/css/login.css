@@ -89,6 +89,7 @@ header .ii{font-family: var(--take);position: absolute;left: 48%;top: 40px;}
 
 .login .btn-signup, 
 .btn-login{
+    text-decoration: none;
     background: var(--primary-gradient);
     float: right;
     margin: 1rem;
