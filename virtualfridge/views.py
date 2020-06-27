@@ -48,6 +48,7 @@ def logout(request):
 
 
 def signup(request):
+	return render(request, 'signup.html')
 	if request.method == 'POST':
 		try:
 			name = request.POST.get('name')
