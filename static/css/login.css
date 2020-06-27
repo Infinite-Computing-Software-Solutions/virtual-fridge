@@ -1,0 +1,147 @@
+/* Import fonts from google font */
+@import url('https://fonts.googleapis.com/css?family=Lobster|Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+@font-face {
+    font-family: 'kalam';
+    src: url('/fonts/Kalam-Regular.ttf');
+}
+@font-face {
+    font-family: 'take';
+    src: url('/fonts/takecharge.ttf');
+}
+*{margin: 0;padding: 0;}
+
+html, body{
+    height: 100%;
+    overflow: hidden;
+    background: var(--background1);
+}
+
+/* Variables */
+:root{
+    --primary-gradient: linear-gradient(to right, #1bbc9b, #15947a);
+    --mango-gradient : linear-gradient(to right, #ffa751, #ffe259);
+    --text-color: #F7F9F9;
+    --Montserrat: "Montserrat", cursive;
+    --Lobster: "Lobster", cursive;
+    --pacifico: 'Pacifico', cursive;
+    --kalam:'kalam';
+    --take:'take';
+    --primary-shadow: 3px 4px 7px rgba(27, 27, 27, 0.534);
+    --border-color: rgba(0,0,0,0.329);
+}
+header{
+    width: 100%;
+    height: 70px;
+    box-shadow: var(--primary-shadow);
+    position: absolute;
+}
+header img{width: 50px;height: 50px;}
+header .image{position: relative;left: 43%; top: 15%;}
+header .line{width: 2px;height: 50px;background: #000;position: relative;left: 47%;top: -62%;border-radius: 50px;}
+header .text{
+    font-family: var(--pacifico);
+    font-size: 30px;
+    position: absolute;
+    left: 48%;
+    top:0px;
+}
+header .ii{font-family: var(--take);position: absolute;left: 48%;top: 40px;}
+.loginform{position: relative;top: 15%;}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 98%;
+    max-height: 610px;
+}
+
+.container .panel{
+    width: 60%;
+    height: 72%;
+    box-shadow: var(--primary-gradient);
+}
+
+.row{
+    border-radius: 40px;
+    display: grid;
+    grid-template-columns: 65% 35%;
+    height: 100%;
+    background: #fff;    
+    box-shadow: var(--primary-shadow);
+}
+
+.btn{
+    padding: .5rem 1.5rem;
+    border: none;
+    border-radius: 4rem;
+    background:  var(--primary-gradient);/*#2b5876;*/
+    color: whitesmoke;
+    font-size: .7rem;
+    font-family: var(--Montserrat);
+    cursor: pointer;
+}
+
+.btn:hover{    
+    box-shadow: var(--primary-shadow);
+}
+
+.login .btn-signup, 
+.btn-login{
+    background: var(--primary-gradient);
+    float: right;
+    margin: 1rem;
+    margin-top: -0.5rem;
+}
+
+
+form{
+    height: 55%;
+    max-height: 280px;
+    margin-top: 5.5rem;
+}
+
+form h3, form h6{
+    font-family: var(--Montserrat);
+    padding: 0;
+    margin: 0;
+    padding-left: 3rem;
+}
+
+form h6{
+    font-family: var(--Lobster);
+    color: #444444d2;
+}
+
+form .form-group{
+    text-align: left;
+    border: 1px solid var(--border-color);
+    margin-top: .9rem;
+    margin-right: 2rem;
+    border-radius: 3rem;
+    margin-left: 2rem;
+}
+
+form .form-group .form-input{
+    padding: .5rem 1rem;
+    background: transparent;
+    border: none;
+    font-family: var(--Montserrat);
+    font-size: .9rem;
+    overflow: hidden;
+}
+
+form input:focus{
+    outline: none;
+}
+
+form .btn-signup, form .btn-login{
+    float: none;
+    padding: .8rem 5rem;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    
+}
+
+
