@@ -6,12 +6,14 @@ from django.contrib import auth
 firebase_api = open('firebase_api.txt')
 
 config = {
-	'apiKey': firebase_api.read(),
-	'authDomain': "django-project-dc6f8.firebaseapp.com",
-	'databaseURL': "https://django-project-dc6f8.firebaseio.com",
-	'projectId': "django-project-dc6f8",
-	'storageBucket': "django-project-dc6f8.appspot.com",
-	'messagingSenderId': "457756878283"
+	'apiKey': "AIzaSyBC7ooZMf_K2R5OkSvHIHHi9-6b7ke02hA",
+	'authDomain': "fridge-50aa2.firebaseapp.com",
+	'databaseURL': "https://fridge-50aa2.firebaseio.com",
+	'projectId': "fridge-50aa2",
+	'storageBucket': "fridge-50aa2.appspot.com",
+	'messagingSenderId': "826509812988",
+	'appId': "1:826509812988:web:49ebd376df7915fb51e379",
+	'measurementId': "G-SBHD2XQW2M"
 }
 
 firebase = pyrebase.initialize_app(config)
