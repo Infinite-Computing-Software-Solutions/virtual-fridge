@@ -30,10 +30,7 @@
 			<nav class="page-header__nav js-nav">
 			<ul>
 				<li>
-					<a class="page-header__nav-link js-anchor js-link is-active" href="#home">Home</a>
-				</li>
-				<li>
-					<a class="page-header__nav-link js-anchor js-link" href="#portfolio">Featured recipes</a>
+					<a class="page-header__nav-link js-anchor js-link is-active" href="{%url 'home'%}">Home</a>
 				</li>
 				<li>
 					<a class="page-header__nav-link js-anchor js-link" href="{%url 'recipeslist'%}">Recipes List</a>
@@ -59,33 +56,35 @@
 	<section class="team" id="team">
 		<div class="team__inner">
 			<h2 class="team__title">Your Virtual Fridge</h2>
-			<p class="team__descr">This is Your Virtual Firdge, where you can add, remove and see all your ingredients.</p>
-      <!-- Add ingredients etc, im trying to fix css-->
-      
-      <form action="/ingredient/" method="post">{% csrf_token %}
-        <select name="name" id="ingredient">
-          {% for ingredient in ingredientslist %}
-            <option value="{{ingredient}}">{{ingredient}}</option>
-          {% endfor %}
-        </select>
+			<p class="team__descr">This is Your Virtual Fridge, where you can add, remove and see all your ingredients.</p>
+		<!-- Add ingredients etc, im trying to fix css-->
+		
+		<form action="/addingredient/" method="post">{% csrf_token %}
+			<select name="name" id="ingredient">
+				{% for ingredient in ingredientslist %}
+					<option value="{{ingredient}}">{{ingredient}}</option>
+				{% endfor %}
+			</select>
 
-        <input type="number" name="quantity" placeholder="Quantity"> 
-        <input type="text" name="unit" placeholder="Unit"> 
-        
-        <input type="submit" value="Add Ingredient">
-      </form>
-
-      <ul>
-      {% for name,value in ingredients.items %}
-        {{ name }}
-        {{ value|get_item:'quantity' }}
-        {{ value|get_item:'unit' }}
-		<br/>
-	    {% endfor %}
-      </ul>
-		  
+			<input type="number" name="quantity" placeholder="Quantity"> 
+			<input type="text" name="unit" placeholder="Unit"> 
+			
+			<input type="submit" value="Add Ingredient">
+		</form>
+		
+		<div class="board-list">
+		{% for name,value in ingredients.items %}
+			<div class="card">
+				{{ name }}
+				<span>{{ value|get_item:'quantity'}}</span>
+				<span>{{ value|get_item:'unit' }}</span>
+				<a href="{% url 'deleteingredient' name %}"> &nbsp;x </a>
+			</div>
+		{% endfor %}
+		</div>
+			
 		</div>			
-  </section>
+	</section>
 
 	
 	<!-- $Publish Recipe-->

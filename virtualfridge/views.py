@@ -165,8 +165,7 @@ def addrecipe(request):
 		return render(request, 'dashboard.html')
 
 
-#to be fixed
-def ingredient(request):
+def addingredient(request):
   # uid won't work on repl, since session is not saved as no cookies
   uid = request.session.get('uid') 
   if request.method == 'POST':
@@ -181,10 +180,12 @@ def ingredient(request):
     }
 
     database.child("users").child(uid).child('ingredients').child(iname).set(data)
+  return redirect('/dashboard/')
 
-  elif request.method == 'DELETE':
-    iname = request.POST['name']
-    database.child("users").child(uid).child('ingredients').child(iname).remove()
+def deleteingredient(request, name):
+  uid = request.session.get('uid')
+  print("Ingredient",name,"is being deleted.")
+  database.child("users").child(uid).child('ingredients').child(name).remove()
 
   return redirect('/dashboard/')
 

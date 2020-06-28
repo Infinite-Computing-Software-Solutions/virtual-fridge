@@ -28,8 +28,9 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('search/', views.search, name='search'),
     path('addrecipe/', views.addrecipe, name='addrecipe'),
-    path('ingredient/', views.ingredient, name='ingredient'), # POST to add, DELETE to del
-		path('recipeslist/', views.recipeslist, name='recipeslist')
+    path('addingredient/', views.addingredient, name='addingredient'),
+    path('deleteingredient/<name>', views.deleteingredient, name='deleteingredient'),
+    path('recipeslist/', views.recipeslist, name='recipeslist')
 ]
 
 if settings.DEBUG:

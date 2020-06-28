@@ -889,3 +889,21 @@ body {
     cursor: pointer;
     font-size: 20px;
 }
+
+
+.card {
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+    padding: 10px;
+}
+
+.board-list {
+    background-color: rgb(235, 236, 240);
+    border-radius: 3px;
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-gap: 10px;
+    height: max-content;
+    padding: 10px;
+}
