@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pop up test</title>
+	<script src="{% static 'js/popup.js' %}"></script>
+	<style>
+		pop-up.styled {
+			--content-color: inherit;
+			--content-background: inherit;
+			--content-border: 1px solid grey;
+			--content-padding: 1em 2em;
+		}
+		button {
+			padding: 1em 2em;
+			margin: 1em;
+		}
+	</style>
+</head>
+<body>
+	pop out test
+	<p id="btnCntr"></p>
+
+	<pop-up open>
+		You Have Completed a Challenge! 
+		<ul>
+			<li>Achievemnet</li>
+		</ul>
+	</pop-up>
+
+	<script>
+		let popups = document.querySelectorAll('pop-up');
+		let btnCntr = document.querySelector('#btnCntr');
+		let i = 0;
+		for(let p of popups) {
+			let btn = document.createElement('button');
+			btn.innerHTML = `Achievemnet`;
+			btn.onclick = e => p.open();
+			btnCntr.appendChild(btn);
+
+			p.addEventListener('show', ({detail}) => console.log('Popup', detail, 'opened'));
+			p.addEventListener('hide', ({detail}) => console.log('Popup', detail, 'closed'));
+		}
+
+		let p = document.querySelector('#ask');
+		p.beforeOpen = (popup) => {
+			// Must return bool
+			return confirm("Do you want to open this popup?");
+		};
+		p.beforeClose = (popup) => {
+			// Must return bool
+			return confirm("Do you want to close this popup?");
+		};
+
+	</script>
+</body>
+</html>

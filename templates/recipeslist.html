@@ -29,10 +29,10 @@
 			<nav class="page-header__nav js-nav">
 			<ul>
 				<li>
-					<a class="page-header__nav-link js-anchor js-link is-active" href="#home">Home</a>
+					<a class="page-header__nav-link js-anchor js-link is-active" href="{%url 'home'%}">Home</a>
 				</li>
 				<li>
-					<a class="page-header__nav-link js-anchor js-link" href="#portfolio">Featured recipes</a>
+					<a class="page-header__nav-link js-anchor js-link" href="{%url 'home'%}#portfolio">Featured recipes</a>
 				</li>
 				<li>
 					<a class="page-header__nav-link js-anchor js-link" href="{%url 'dashboard'%}">Dashboard</a>
@@ -42,40 +42,31 @@
 				</li>
 				<li>
 					<form action="/search/" method="POST">
-						<div class="search">
-						<input type="text" name="searchtext" class="searchTerm" placeholder="Search for a recipe...">
-						<button type="submit" class="searchButton">
-							<i class="fa fa-search"></i>
-						</button>
-						</div>
-					</form>
+            <div class="search">
+              <input type="text" name="searchtext" class="searchTerm" placeholder="Search for a recipe...">
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </form>
 				</li>
 			</ul>
 			</nav>
 		</div>
 	</header>
-	<!-- $Promo section-->
-	<section class="promo js-jumbo" id="home">
-		<h2 class="promo__title">Virtual<span>Fridge</span></h2>
-		<p class="promo__descr">Welcome to your kitchen buddy.</p>
-		<a class="promo__btn" href="/login">LOGIN TO START COOKIN'</a>
-		<a class="promo__go-next js-anchor" href="#portfolio">Scroll down</a>
-	</section>
+
+	<!-- All Recipes Please add CSS and or fix html, images not found-->
+
 	<section class="portfolio js-portfolio" id="portfolio">
 		<div class="portfolio__inner">
-			<h2 class="portfolio__title">Featured Recipes</h2>
-			<p class="portfolio__descr">These are your featured recipes, tailored to you by your own taste, and what's hot in the eyes of the public.</p>
+			<h2 class="portfolio__title">Recipes List</h2>
+			<p class="portfolio__descr">All of your recipes, tailored to you by your own taste, and what's hot in the eyes of the public.</p>
 			<nav class="portfolio__filter">
-			<!-- <ul>
-				<li class="portfolio__filter-btn is-selected js-filter" data-filter="all">All</li>
-				<li class="portfolio__filter-btn js-filter" data-filter="web">Italian</li>
-				<li class="portfolio__filter-btn js-filter" data-filter="graphic">Chinese</li>
-				<li class="portfolio__filter-btn js-filter" data-filter="flat">Desserts</li>
-			</ul> -->
+        <!-- filter needed here -->
 			</nav>
 			<ul class="portfolio__content">
 
-      {% for key,value in featuredrecipes.items %}
+      {% for key,value in dic.items %}
         <li class="portfolio__item js-item" data-cat="all flat">
           <a href="#">
             <img class="portfolio__item-img js-lazy"  src="/media/{{ value|get_item:'image'}}" alt='{{ value|get_item:'name' }}'>
@@ -83,13 +74,15 @@
               <span class="portfolio__item-cat">By {{ value|get_item:'author' }}</span>
             </div>
           </a>
+          
         </li>
-      {% endfor %}
-
+	    {% endfor %}
+      
 			</ul>
 		</div>
 	</section>
-	
+
+
 	<!-- $Page footer-->
 	<footer class="page-footer">
 		<div class="page-footer__inner"><span class="page-footer__copyright">&copy; Copyright 2020 Infinite Computing Software Solutions</span>

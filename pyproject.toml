@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "virtual-fridge-2"
+version = "0.1.0"
+description = ""
+authors = ["repl.it user <replituser@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^3.0.7"
+pyrebase = "^3.0.27"
+django-admin = "^2.0.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

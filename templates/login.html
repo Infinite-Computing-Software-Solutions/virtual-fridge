@@ -4,12 +4,15 @@
     Login
 {% endblock %}
 
+
 {% block content %}
 {% if msg %}
     <script>
         alert('{{msg}}')
     </script>
 {% endif %}
+
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,24 +26,27 @@
     <script src="https://kit.fontawesome.com/23412c6a8d.js"></script>
 
     <!-- Custom Style-->
-    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 
 <body>
+		<br>
+		
+    <a class="btn back-btn" href="/">Back</a>
     <div class="loginform" id="loginform">
     <div class="container">
         <div class="panel">
             <div class="col login" id="login-form"> 
 
-                <a type="button" class="btn btn-signup" id="signup-page" href="/signup">Sign Up</a>
-                <form>
+                <a class="btn btn-signup" id="signup-page" href="/signup">Sign Up</a>
+                <form action="/dashboard/" method="post"> {% csrf_token %}
                     <h3>Ready to Login</h3>
 
                     <div class="form-group">
-                        <input type="text" placeholder="Email/Username" class="form-input" id="eimp"/>
+                        <input type="email" placeholder="Email" class="form-input" name="email"/>
                     </div>
                     <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-input" id="pimp"/>
+                        <input type="password" placeholder="Password" class="form-input" name="password"/>
                     </div>
                     <button type="submit" class="btn btn-login" id="loginbtn">Login</button>
                 </form>

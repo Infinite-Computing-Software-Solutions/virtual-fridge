@@ -96,6 +96,11 @@ header .ii{font-family: var(--take);position: absolute;left: 48%;top: 40px;}
     margin-top: -0.5rem;
 }
 
+.back-btn {
+  text-decoration: none;
+  margin: 1rem;
+}
+
 
 form{
     height: 55%;
