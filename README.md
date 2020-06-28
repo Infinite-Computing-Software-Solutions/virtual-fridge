@@ -17,19 +17,14 @@ Share recipes from your virtual fridge and find out which ones you can make from
 
 ## Instructions
 1. Run the following commands to install dependencies:
-```
-pip3 install -r requirements.txt
-```
-Or alternatively:
-```
-pip3 install django
-pip3 install pyrebase
-```
+  ```
+  pip3 install -r requirements.txt
+  ```
 
 2. To run the web application server:
-```
-python3 manage.py runserver
-```
+  ```
+  python3 manage.py runserver
+  ```
 Then go to http://127.0.0.1:8000/ to check it out in development mode.
 
 ## Technology
