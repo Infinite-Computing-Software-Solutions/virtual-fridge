@@ -16,12 +16,17 @@ Share recipes from your virtual fridge and find out which ones you can make from
 
 
 ## Instructions
-Run the following commands to install dependencies:
+1. Run the following commands to install dependencies:
+```
+pip3 install -r requirements.txt
+```
+Or alternatively:
 ```
 pip3 install django
 pip3 install pyrebase
 ```
-To run the web application server:
+
+1. To run the web application server:
 ```
 python3 manage.py runserver
 ```
