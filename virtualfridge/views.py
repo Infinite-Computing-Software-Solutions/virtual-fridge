@@ -109,7 +109,7 @@ def search(request):
     for rid, contents in recipeData.items():
       if searchtext.lower() in contents['name'].lower():
         print("Found similar recipe", contents)
-        return render(request, 'home.html', {'recipe': contents}) # opens recipe page directly (home)
+        return render(request, 'recipe.html', {'recipe': contents})
   return redirect('home')
 
 
