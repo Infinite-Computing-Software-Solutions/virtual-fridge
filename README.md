@@ -26,7 +26,7 @@ pip3 install django
 pip3 install pyrebase
 ```
 
-1. To run the web application server:
+2. To run the web application server:
 ```
 python3 manage.py runserver
 ```
