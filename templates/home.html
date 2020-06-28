@@ -75,16 +75,16 @@
 			</nav>
 			<ul class="portfolio__content">
 
-      {% for key,value in featuredrecipes.items %}
-        <li class="portfolio__item js-item" data-cat="all flat">
-          <a href="#">
-            <img class="portfolio__item-img js-lazy"  src="/media/{{ value|get_item:'image'}}" alt='{{ value|get_item:'name' }}'>
-            <div class="portfolio__item-caption"><span class="portfolio__item-title">{{ value|get_item:'name' }}</span>
-              <span class="portfolio__item-cat">By {{ value|get_item:'author' }}</span>
-            </div>
-          </a>
-        </li>
-      {% endfor %}
+			{% for key,value in featuredrecipes.items %}
+				<li class="portfolio__item js-item" data-cat="all flat">
+				<a href="{% url 'recipe' key %}">
+					<img class="portfolio__item-img js-lazy"  src="/media/{{ value|get_item:'image'}}" alt='{{ value|get_item:'name' }}'>
+					<div class="portfolio__item-caption"><span class="portfolio__item-title">{{ value|get_item:'name' }}</span>
+					<span class="portfolio__item-cat">By {{ value|get_item:'author' }}</span>
+					</div>
+				</a>
+				</li>
+			{% endfor %}
 
 			</ul>
 		</div>
