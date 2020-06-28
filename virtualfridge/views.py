@@ -29,11 +29,13 @@ def home(request):
   featuredrecipes = {}
   i = 0
   for k in allrecipes:
+    # fname = allrecipes[k]['name']+allrecipes[k]['image']
+    # storage.child("recipe_images/"+fname).download("/media/"+fname)
     featuredrecipes[k] = allrecipes[k]
     i += 1
     if i == maxnum:
       break
-  print(featuredrecipes)
+  
   return render(request, 'home.html', {'featuredrecipes': featuredrecipes})
 
 def login(request):
@@ -42,7 +44,6 @@ def login(request):
 
 def recipe(request, name):
   recipe = database.child('recipes').child(name).get().val()
-  print(dict(recipe))
   return render(request, 'recipe.html', {'recipe': recipe})
 
 
@@ -92,7 +93,6 @@ def dashboard(request):
         'ingredients': ingredients,
         'ingredientslist': ingredientslist
       })
-      return render(request, 'dashboard.html', {'email': email})
     else:
       return redirect('/login/')
 
@@ -139,36 +139,38 @@ def signup(request):
   else:
     return render(request, 'signup.html')
 
-#to be fixed
 def addrecipe(request): 
-	if request.method == 'POST':
-		rname = request.POST['recipename']
-		rauthor = request.POST['recipeauthor']
-		rdesc = request.POST['recipedescription']
-		ringr = request.POST['recipeingredients']
-		rinstr = request.POST['recipeinstructions']
-		image_upload = request.FILES['recipeimage']
-		fs = FileSystemStorage()
-		fname = rname+image_upload.name
-		fs.save(fname, image_upload)
+  if request.method == 'POST':
+    rname = request.POST['recipename']
+    rauthor = request.POST['recipeauthor']
+    rdesc = request.POST['recipedescription']
+    ringr = request.POST['recipeingredients']
+    rinstr = request.POST['recipeinstructions']
+    image_upload = request.FILES['recipeimage']
+    fs = FileSystemStorage()
+    fname = rname+image_upload.name
+    fs.save(fname, image_upload)
 
 
-		data = {
-			'name': rname, 
-			'author': rauthor,
-			'description': rdesc,
-			'ingredients': {},
-			'instructions': rinstr,
-			'image': fname
-		}
+    data = {
+      'name': rname, 
+      'author': rauthor,
+      'description': rdesc,
+      'ingredients': {},
+      'instructions': rinstr,
+      'image': fname
+    }
 
-		for ingr in ringr.split(","):
-			data["ingredients"][ingr.split()[0]] =  {"quantity": ingr.split()[1],"unit": ingr.split()[2]}
-
-		# storage.child("recipe_images").put(image_upload)
-		storage.child("recipe_images/"+fname).put("media/"+fname, request.session['sid'])
-		database.child("recipes").child(rname).set(data)
-		return render(request, 'dashboard.html')
+    for ingr in ringr.split(","):
+      number = ' '
+      for char in ingr:
+        if char in "0123456789":
+          number+=char #bessttttt exactly just shift+tab then tab
+          number+=' '
+      data["ingredients"][ingr.split(number)[0]] =  {"quantity": number,"unit": ingr.split(number)[1]}
+    storage.child("recipe_images/"+fname).put("media/"+fname, request.session['sid'])
+    database.child("recipes").child(rname).set(data)
+    return render(request, 'dashboard.html')
 
 
 def addingredient(request):
@@ -201,10 +203,63 @@ from django.template.defaulttags import register
 def get_item(dictionary, key):
     return dictionary.get(key)
 
+from collections import OrderedDict
+
 def recipeslist(request):
-	
-	dic = {}
+	dic = OrderedDict()
 	all_recipes = database.child("recipes").get()
-	for recipe in all_recipes.each():
-		dic[recipe.key()] = recipe.val()
-	return render(request, 'recipeslist.html', {"dic":dic})
+	uid = request.session.get('uid')
+	try:
+		sortedrecipes = database.child('user').child(uid).child('sortedrecipe').get()
+		for recipe in sortedrecipes.each():
+			dic[recipe.val()] = database.child('recipes').child(recipe.val())
+		return render(request, 'recipeslist.html', {"dic":dic})
+	except:
+		for recipe in all_recipes.each():
+			dic[recipe.key()] = recipe.val()
+		return render(request, 'recipeslist.html', {"dic":dic})
+
+
+#sort recipelist
+def extractRecipesUtil(recipes):
+	r = {}
+	for recipek,recipe in recipes.items():
+		r[recipe['name']] = recipe['ingredients']
+	return r
+
+def searchrecipesUtil(fridgeingredients, recipes, sortmethod):
+	maxmatch = []
+	minmiss = []
+	for recipek in recipes:
+		matched = 0
+		missing = 0
+		for ingredientk in recipes[recipek]:
+			if ingredientk in fridgeingredients:
+				if int(recipes[recipek][ingredientk]["quantity"]) <= int(fridgeingredients[ingredientk]["quantity"]):
+					matched += 1
+				else:
+					missing += 1
+			else:
+				missing += 1
+		maxmatch.append([matched, recipek])
+		minmiss.append([missing, recipek])
+	maxmatch = sorted(maxmatch, reverse = 1)
+	minmiss = sorted(minmiss)
+	if sortmethod == 'maxmatch':
+		return [r[1] for r in maxmatch]
+	elif sortmethod == 'minmiss':
+		return [r[1] for r in minmiss]
+
+def sortrecipelistMain(request):
+	uid = request.session.get('uid') 
+	if request.method == 'POST':
+		rsortmethod = request.POST['sort']
+		extracted = extractRecipesUtil(database.child("recipes").get().val())
+		fridgeingredients = database.child('users').child(uid).child('ingredients').get().val()
+		sorteddata = searchrecipesUtil(fridgeingredients,extracted, rsortmethod)
+		print(sorteddata)
+		for i,recipe in enumerate(sorteddata):
+			database.child('users').child(uid).child('sortedrecipes').child(i).set(recipe)
+	
+		return redirect('/recipeslist/')
+print(1)

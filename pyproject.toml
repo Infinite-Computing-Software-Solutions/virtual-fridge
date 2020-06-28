@@ -9,6 +9,7 @@ python = "^3.8"
 django = "^3.0.7"
 pyrebase = "^3.0.27"
 django-admin = "^2.0.1"
+whitenoise = "^5.1.0"
 
 [tool.poetry.dev-dependencies]
 

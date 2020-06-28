@@ -29,10 +29,7 @@
             <nav class="page-header__nav js-nav">
             <ul>
                 <li>
-                    <a class="page-header__nav-link js-anchor js-link is-active" href="#home">Home</a>
-                </li>
-                <li>
-                    <a class="page-header__nav-link js-anchor js-link" href="#portfolio">Featured recipes</a>
+                    <a class="page-header__nav-link js-anchor js-link is-active" href="{%url 'home'%}">Home</a>
                 </li>
                 <li>
                     <a class="page-header__nav-link js-anchor js-link" href="{%url 'dashboard'%}">Dashboard</a>
@@ -55,41 +52,36 @@
         </div>
     </header>
     <!-- $Promo section-->
-    <section>
-        <div class="row">
-            <div class="column">
-                {{ recipe.name }}
-                <br/>
-                <div>By {{ recipe.author }}</div>
-            </div>
-            <div class="column">
-                <img width="400" height="400" src="/media/{{ recipe.image}}" alt='{{ recipe.name }}'>
-            </div>
-        </div>
-        {{ recipe.description }}
-        
-        <br/>
-        <br/>
-        <br/>
-        <h2>Ingredients</h2>
-        <ul>
-        {% for name,content in recipe.ingredients.items %}
-            <li>
-                {{ name }}
-                {{ content.quantity}}
-                {{ content.unit}}
-            </li>
-            <br/>
-        {% endfor %}
-        <ul/>
+    <section style="margin-left:1.5rem;">
+      <h2>{{ recipe.name }}</h2>
+      <div>By {{ recipe.author }}</div>
 
-        <br/>
-        <br/>
-        <h2>Directions</h2>
-        {{ recipe.instructions }}
-        <br/>
-        <br/>
-        <br/>
+      <img style="object-fit:cover;border-radius:12px;" width="400" height="400" src="/media/{{ recipe.image }}" alt='{{ recipe.name }}'>
+      <br/>
+      {{ recipe.description }}
+      
+      <br/>
+      <br/>
+      <br/>
+      <h2>Ingredients</h2>
+      <ul>
+      {% for name,content in recipe.ingredients.items %}
+          <li>
+              <div style="font-weight:bold;">{{ name }}</div>
+              {{ content.quantity}}
+              {{ content.unit}}
+          </li>
+          <br/>
+      {% endfor %}
+      <ul/>
+
+      <br/>
+      <br/>
+      <h2>Directions</h2>
+      {{ recipe.instructions }}
+      <br/>
+      <br/>
+      <br/>
     </section>
 
 	

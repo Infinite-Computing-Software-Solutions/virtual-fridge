@@ -57,6 +57,17 @@
 
 	<!-- All Recipes Please add CSS and or fix html, images not found-->
 
+	<!-- Sort dropdown cuz the toggle didnt work-->
+	<form style="padding-left: 20px" action="/sort/" method="post">
+	<h3>Sort By <br></h3>
+		<select name="sort" id="sort" >
+					<option value="maxmatch">Most Matched Ingredients</option>
+					<option value="minmiss">Least Missing Ingredients</option>
+		</select> 
+		<br>
+		<input type="submit" value="Sort">
+	
+	</form>
 	<section class="portfolio js-portfolio" id="portfolio">
 		<div class="portfolio__inner">
 			<h2 class="portfolio__title">Recipes List</h2>
