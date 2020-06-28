@@ -162,12 +162,10 @@ def addrecipe(request):
     }
 
     for ingr in ringr.split(","):
-      number = ' '
-      for char in ingr:
-        if char in "0123456789":
-          number+=char #bessttttt exactly just shift+tab then tab
-          number+=' '
-      data["ingredients"][ingr.split(number)[0]] =  {"quantity": number,"unit": ingr.split(number)[1]}
+      name, quantity, unit = ingr.split(' ')
+      name = name.replace('\n', ' ').replace('\r', ' ')
+      data["ingredients"][name] =  {"quantity": quantity,"unit": unit}
+    print(data)
     storage.child("recipe_images/"+fname).put("media/"+fname, request.session['sid'])
     database.child("recipes").child(rname).set(data)
     return render(request, 'dashboard.html')
