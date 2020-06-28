@@ -40,6 +40,12 @@ def login(request):
 	return render(request, 'login.html')
 
 
+def recipe(request, name):
+  recipe = database.child('recipes').child(name).get().val()
+  print(dict(recipe))
+  return render(request, 'recipe.html', {'recipe': recipe})
+
+
 def dashboard(request):
   ingredientslist = []
   with open('ingredientslist.txt') as my_file:
@@ -161,7 +167,7 @@ def addrecipe(request):
 
 		# storage.child("recipe_images").put(image_upload)
 		storage.child("recipe_images/"+fname).put("media/"+fname, request.session['sid'])
-		database.child("recipes").push(data)
+		database.child("recipes").child(rname).set(data)
 		return render(request, 'dashboard.html')
 
 

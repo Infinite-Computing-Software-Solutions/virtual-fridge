@@ -1,0 +1,104 @@
+{%load static%}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Virtual Fridge</title>
+    <meta name="description" content="Page-specific description">
+    <meta name="keywords" content="Page-specific keywords">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="static/images/favicons/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="static/images/favicons/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" href="static/images/favicons/apple-touch-icon-precomposed.png">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,300,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">	
+    <link rel="stylesheet" type="text/css" href="{% static 'css/screen.css' %}">
+</head>
+<body>
+    <!-- $Page header-->
+    <header class="page-header js-header">
+        <div class="page-header__inner">
+            <div class="page-header__logo">
+            <h1>Virtual</h1>
+            &nbsp;<span>Fridge</span>
+            </div>
+            <nav class="page-header__nav js-nav">
+            <ul>
+                <li>
+                    <a class="page-header__nav-link js-anchor js-link is-active" href="#home">Home</a>
+                </li>
+                <li>
+                    <a class="page-header__nav-link js-anchor js-link" href="#portfolio">Featured recipes</a>
+                </li>
+                <li>
+                    <a class="page-header__nav-link js-anchor js-link" href="{%url 'dashboard'%}">Dashboard</a>
+                </li>
+                <li>
+                    <a class="page-header__nav-link js-anchor js-link" href="{%url 'recipeslist'%}">Recipes List</a>
+                </li>
+                <li>
+                    <form action="/search/" method="POST">
+                        <div class="search">
+                        <input type="text" name="searchtext" class="searchTerm" placeholder="Search for a recipe...">
+                        <button type="submit" class="searchButton">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- $Promo section-->
+    <section>
+        <div class="row">
+            <div class="column">
+                {{ recipe.name }}
+                <br/>
+                <div>By {{ recipe.author }}</div>
+            </div>
+            <div class="column">
+                <img width="400" height="400" src="/media/{{ recipe.image}}" alt='{{ recipe.name }}'>
+            </div>
+        </div>
+        {{ recipe.description }}
+        
+        <br/>
+        <br/>
+        <br/>
+        <h2>Ingredients</h2>
+        <ul>
+        {% for name,content in recipe.ingredients.items %}
+            <li>
+                {{ name }}
+                {{ content.quantity}}
+                {{ content.unit}}
+            </li>
+            <br/>
+        {% endfor %}
+        <ul/>
+
+        <br/>
+        <br/>
+        <h2>Directions</h2>
+        {{ recipe.instructions }}
+        <br/>
+        <br/>
+        <br/>
+    </section>
+
+	
+    <!-- $Page footer-->
+    <footer class="page-footer">
+        <div class="page-footer__inner"><span class="page-footer__copyright">&copy; Copyright 2020 Infinite Computing Software Solutions</span>
+            <a class="page-footer__gotop js-anchor" href="#home">Go to top</a>
+        </div>
+    </footer>
+</body>
+</html>
+{% endblock content %}
