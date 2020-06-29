@@ -32,7 +32,8 @@ urlpatterns = [
     path('deleteingredient/<name>', views.deleteingredient, name='deleteingredient'),
     path('recipe/<name>', views.recipe, name='recipe'),
     path('recipeslist/', views.recipeslist, name='recipeslist'),
-		path('sort/', views.sortrecipelistMain, name='sort'),
+    path('myrecipes/', views.myrecipes, name='myrecipes'),
+    path('sort/', views.sortrecipelistMain, name='sort'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -48,6 +48,7 @@ Chickpeas
 Black beans
 Hominy
 Olives
+Salt
 Capers
 Chipotles 
 Pickled jalapenos
@@ -56,16 +57,18 @@ Tomatoes
 Tomato paste
 Roasted red peppers
 Tuna
+Sugar
 Anchovy paste
 Milk
 Plain yogurt
 Greek yogurt
 Unsalted butter
+Butter
 Cheddar
 Mozzarella
 Goat cheese
 Parmesan
-Eggs
+Egg
 Apples
 Avocados
 Bananas

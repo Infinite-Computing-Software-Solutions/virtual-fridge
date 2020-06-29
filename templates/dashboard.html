@@ -33,7 +33,7 @@
 					<a class="page-header__nav-link js-anchor js-link is-active" href="{%url 'home'%}">Home</a>
 				</li>
 				<li>
-					<a class="page-header__nav-link js-anchor js-link" href="{%url 'recipeslist'%}">Recipes List</a>
+					<a class="page-header__nav-link js-anchor js-link" href="{%url 'myrecipes'%}">Recipes You Can Make</a>
 				</li>
 				<li>
 					<form action="/search/" method="POST">
@@ -70,7 +70,9 @@
 			<select name="unit" id="unit">
 					<option value="g">g</option>
 					<option value="ml">ml</option>
-					<option value="lb">lb</option>
+					<option value="cups">cups</option>
+					<option value="teaspoons">teaspoons</option>
+					<option value="spoons">spoons</option>
 			</select> 
 			
 			<input type="submit" value="Add Ingredient">

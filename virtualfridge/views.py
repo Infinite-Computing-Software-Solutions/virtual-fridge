@@ -218,6 +218,34 @@ def recipeslist(request):
 		return render(request, 'recipeslist.html', {"dic":dic})
 
 
+def myrecipes(request):
+  dic = OrderedDict()
+  all_recipes = database.child("recipes").get().val()
+  uid = request.session.get('uid')
+  user_ingredients = dict(database.child("users").child(uid).get().val())['ingredients']
+  
+  my_recipes = {}
+  for k in all_recipes:
+    makeable = True
+    recipe_ingredients = all_recipes[k]['ingredients']
+    print(recipe_ingredients)
+    print(user_ingredients)
+    for i in recipe_ingredients:
+      
+      if i in user_ingredients:
+        print("I have an ingredient", i, "for cooking", all_recipes[k]['name'])
+      else:
+        print("I don't have ingredient", i)
+        makeable = False
+        break
+    if makeable:
+      my_recipes[k] = all_recipes[k]
+    break
+  
+  return render(request, 'myrecipes.html', {"dic":my_recipes})
+
+
+
 #sort recipelist
 def extractRecipesUtil(recipes):
 	r = {}

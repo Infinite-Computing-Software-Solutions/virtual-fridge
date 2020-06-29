@@ -58,8 +58,8 @@
 	<!-- All Recipes Please add CSS and or fix html, images not found-->
 	<section class="portfolio js-portfolio" id="portfolio">
 		<div class="portfolio__inner">
-			<h2 class="portfolio__title">Recipes List</h2>
-			<p class="portfolio__descr">All of your recipes, tailored to you by your own taste, and what's hot in the eyes of the public.</p>
+			<h2 class="portfolio__title">Recipes You Can Make</h2>
+			<p class="portfolio__descr">These are the recipes YOU can make with the ingredients you have in your Virtual Fridge!</p>
 			<nav class="portfolio__filter">
         <!-- filter needed here -->
 			</nav>
@@ -68,8 +68,8 @@
 				{% for key,value in dic.items %}
 					<li class="portfolio__item js-item" data-cat="all flat">
 					<a href="{% url 'recipe' key %}">
-						<img class="portfolio__item-img js-lazy"  src="/media/{{ value|get_item:'image'}}" alt='{{ value|get_item:'name' }}'>
-						<div class="portfolio__item-caption"><span class="portfolio__item-title">{{ value|get_item:'name' }}</span>
+						<img class="portfolio__item-img js-lazy"  src="/media/{{ value|get_item:'image'}}" alt='{{ key }}'>
+						<div class="portfolio__item-caption"><span class="portfolio__item-title">{{ key }}</span>
 						<span class="portfolio__item-cat">By {{ value|get_item:'author' }}</span>
 						</div>
 					</a>
